@@ -113,7 +113,7 @@
                 &qesc   &kp W   &kp E       &kp R       &kp T        &kp Y     &kp U            &kp I     &kp O    &kp P
                 &kp A   &kp S   &kp D       &kp F       &kp G        &kp H     &kp J            &kp K     &kp L    &kp SQT
                 &mt LSHIFT Z   &kp X   &kp C       &kp V       &kp B        &kp N     &kp M     &kp COMMA &kp DOT  &mt RSHIFT SLASH
-                                &kp LCTRL   &kp LGUI &lt NUMBER SEMI  &lt SYMBOL BSPC &kp SPACE  &mt RSHIFT RET
+                                &kp LCTRL &lt NUMBER TAB &kp LGUI  &kp SPACE &lt SYMBOL BSPC &mt RSHIFT RET
             >;
         };
 
@@ -137,7 +137,7 @@
 
         NAVIGATION_layer {
             bindings = <
-                &none           &kp F2          &out OUT_USB    &out OUT_BLE    &bt BT_CLR      &none       &kp HOME    &kp UP      &kp END     &kp BSPC 
+                &bootloader     &kp F2          &out OUT_USB    &out OUT_BLE    &bt BT_CLR      &none       &kp HOME    &kp UP      &kp END     &kp BSPC 
                 &kp TAB         &none           &bt BT_SEL 0    &bt BT_SEL 1    &none           &none       &kp LEFT    &kp DOWN    &kp RIGHT   &kp RET
                 &none           &none           &bt BT_SEL 2    &bt BT_SEL 3    &bt BT_SEL 4    &none       &kp C_PREV  &kp C_PP    &kp C_NEXT  &kp DEL    
                                                 &trans          &trans          &trans          &trans      &trans      &trans
