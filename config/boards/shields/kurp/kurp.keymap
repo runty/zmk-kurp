@@ -122,7 +122,7 @@
                 &kp EXCL    &kp AT      &kp HASH    &kp DLLR    &kp PRCNT   &kp CARET   &kp AMPS    &kp STAR    &kp PIPE    &none
                 &kp MINUS   &kp EQUAL   &kp LBKT    &kp RBKT    &kp BSLH    &kp F1      &kp F2      &kp F3      &kp F4      &kp F5
                 &kp TAB     &none       &kp LPAR    &kp RPAR    &kp COLON   &kp F6      &kp F7      &kp F8      &kp F9      &kp F10
-                                        &kp PG_DN   &kp PG_UP   &trans      &mo BT_L    &trans      &kp C_MUTE
+                                        &kp PG_DN   &kp PG_UP   &trans      &mo NAVIGATION    &trans      &kp C_MUTE
             >;
         };
 
@@ -131,7 +131,7 @@
                 &kp N1      &kp N2      &kp N3      &kp N4      &kp N5      &kp N6      &kp N7      &kp N8      &kp N9      &kp N0
                 &kp UNDER   &kp PLUS    &kp LBRC    &kp RBRC    &kp PIPE    &kp LEFT    &kp DOWN    &kp UP      &kp RIGHT   &kp TILDE
                 &kp TAB     &none       &kp LPAR    &kp RPAR    &kp SEMI    &kp HOME    &kp END     &kp PG_UP    &kp PG_DN  &kp GRAVE
-                                        &trans      &trans      &trans      &mo BT_L    &kp DEL     &kp C_PP
+                                        &trans      &trans      &trans      &mo NAVIGATION    &kp DEL     &kp C_PP
             >;
         };
 
