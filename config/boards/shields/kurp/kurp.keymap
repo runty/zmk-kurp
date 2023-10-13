@@ -113,7 +113,7 @@
                 &qesc   &kp W   &kp E       &kp R       &kp T        &kp Y     &kp U            &kp I     &kp O    &kp P
                 &kp A   &kp S   &kp D       &kp F       &kp G        &kp H     &kp J            &kp K     &kp L    &kp SQT
                 &mt LSHIFT Z   &kp X   &kp C       &kp V       &kp B        &kp N     &kp M     &kp COMMA &kp DOT  &mt RSHIFT SLASH
-                                &kp LCTRL &lt NUMBER TAB &kp LGUI  &kp SPACE &lt SYMBOL BSPC1 &mt RSHIFT RET
+                                &kp LCTRL &lt NUMBER TAB &kp LGUI  &kp SPACE &lt SYMBOL BSPC &mt RSHIFT RET
             >;
         };
 
