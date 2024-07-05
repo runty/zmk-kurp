@@ -1,0 +1,186 @@
+/*
+ * Copyright (c) 2023 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/outputs.h>
+
+// Layer definitions
+
+#define BASE 0
+#define SYM 1
+#define EXT 2
+#define FNC 3
+#define SYM2 4
+#define ACCENT 5
+#define SETTINGS 6
+
+// -----------------
+
+&sk {
+    // don't release mods on other mods presses
+
+    ignore-modifiers;
+};
+
+/ {
+    behaviors {
+        // Enables holding the first mod-tap key
+        // by performing a tap-release-hold sequence.
+        // To use it: "&qt KEYCODE1 KEYCODE2"
+
+        qt: quick_tap {
+            compatible = "zmk,behavior-hold-tap";
+            label = "QUICK_TAP";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            require-prior-idle-ms = <50>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <200>;
+            bindings = <&kp>, <&kp>;
+        };
+    };
+
+    macros {
+        // sometimes my device thinks a modifier is being held down
+        // pressing all modifiers fixes it.
+
+        unstick: unstick {
+            label = "ZM_unstick";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LSHIFT &kp RSHIFT &kp LCTRL &kp RCTRL &kp LALT &kp RALT &kp LGUI &kp RGUI>;
+        };
+
+        phil: phil {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <5>;
+            tap-ms = <10>;
+            bindings = <&kp D &kp O &kp I &kp N &kp K &kp N4 &kp N2 &kp RET>;
+            label = "PHIL";
+        };
+
+        serv: serv {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <5>;
+            tap-ms = <10>;
+            bindings = <&kp LS(L) &kp I &kp N &kp K &kp N8 &kp LS(S) &kp E &kp R &kp V &kp I &kp C &kp E &kp RET>;
+            label = "SERV";
+        };
+    };
+
+    combos {
+        compatible = "zmk,combos";
+
+        combo_esc {
+            key-positions = <10 11>;
+            bindings = <&kp ESCAPE>;
+        };
+
+        combo_cut {
+            key-positions = <30 31>;
+            bindings = <&kp LG(X)>;
+        };
+        combo_copy {
+            key-positions = <31 32>;
+            bindings = <&kp LG(C)>;
+        };
+        combo_paste {
+            key-positions = <32 33>;
+            bindings = <&kp LG(V)>;
+        };
+        combo_select_all {
+            key-positions = <31 33>;
+            bindings = <&kp LG(A)>;
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        // Base alpha layer
+
+        default_layer {
+            label = "Base";
+            bindings = <
+&qt GLOBE ESC &kp F11 &kp N3 &kp N4 &kp N5 &kp N6 &kp N7 &kp N8 &kp C_PLAY_PAUSE &qt GLOBE C_MUTE
+&kp Q  &kp W  &kp E  &kp R  &kp T  &kp Y   &kp U  &kp I  &kp O  &kp P
+&qt LEFT_SHIFT A    &qt LEFT_ALT S    &qt LEFT_GUI D    &qt LEFT_CONTROL F    &qt LC(LS(LALT)) G &qt RC(RS(RALT)) H          &qt RIGHT_CONTROL J    &qt RIGHT_GUI K    &qt RIGHT_ALT L    &qt RIGHT_SHIFT SINGLE_QUOTE
+&qt LEFT_SHIFT Z    &qt RS(RC(RA(RGUI))) X             &kp C             &kp V                 &kp B              &kp N          &kp M        &kp COMMA          &qt RS(RC(RA(RGUI))) DOT            &qt RIGHT_SHIFT SLASH
+                                      &lt 2 TAB             &lt 1 BACKSPACE   &qt RIGHT_SHIFT SPACE    &lt 3 ENTER
+            >;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+        };
+
+        // Numbers and high frequency symbols
+
+        sym_layer {
+            label = "Sym."; 
+            bindings = <
+&kp F1  &kp F2 &kp F3 &kp F4 &kp F5 &kp F6 &kp F7  &kp F8  &kp F9  &kp F10
+&none           &none          &none          &none          &none          &kp C_PLAY_PAUSE    &kp C_MUTE     &none            &none        &none
+&none           &none          &none          &none          &none          &kp LEFT            &kp DOWN       &kp UP           &kp RIGHT    &kp SEMICOLON
+&none           &none          &none          &none          &none          &kp HOME            &kp PAGE_UP    &kp PAGE_DOWN    &kp END      &sl 4
+                                         &none          &none          &kp ESCAPE          &kp DEL          
+            >;
+        };
+
+        // Main modifiers and arrow keys
+
+        ext_layer {
+            label = "Mods";
+            bindings = <
+&bootloader &none          &none          &none          &none          &none    &none           &none           &kp LG(MINUS)           &kp LG(PLUS)
+&none    &kp F7    &kp F8    &kp F9    &kp F10      &bootloader     &kp KP_N7    &kp KP_N8    &kp KP_N9    &kp BACKSPACE
+&none    &kp F4    &kp F5    &kp F6    &none        &none           &kp KP_N4    &kp KP_N5    &kp KP_N6    &kp COLON
+&none    &kp F1    &kp F2    &kp F3    &none        &kp KP_N0       &kp KP_N1    &kp KP_N2    &kp KP_N3    &kp DOT
+                             &kp CAPSLOCK &kp CAPSLOCK    &kp GLOBE    &kp KP_N0               
+            >;
+        };
+
+        // Function keys with modifiers
+
+        fnc_layer {
+            label = "FRow";
+            bindings = <
+&none           &none          &none          &none          &none          &none    &none           &none           &none           &none
+&phil    &kp GRAVE     &kp LEFT_BRACE          &kp RIGHT_BRACE          &kp BACKSLASH    &none    &kp AMPS      &kp ASTERISK    &none        &serv
+&kp MINUS    &kp EQUAL    &kp LEFT_BRACKET        &kp RIGHT_BRACKET        &kp PIPE         &none    &kp DOLLAR    &kp PERCENT     &kp CARET    &none
+&kp UNDER        &kp PLUS    &kp LEFT_PARENTHESIS    &kp RIGHT_PARENTHESIS    &kp TILDE        &none    &kp EXCL      &kp AT          &kp HASH     &kp LS(LG(LC(NUMBER_4)))
+                             &none          &none                    &none            &none          
+            >;
+        };
+
+        // Low frequency symbols.
+
+        symbols_2_layer {
+            label = "Sym.2";
+            bindings = <
+&bt BT_SEL 0    &bt BT_SEL 1   &bt BT_SEL 2   &bt BT_SEL 3   &bt BT_SEL 4          &none    &none           &none           &none           &bt
+&none           &none          &none          &none          &none          &none    &none           &none           &none           &bt BT_CLR
+&none           &none          &none          &none          &none          &none    &bt BT_SEL 4    &none           &none           &none
+&none           &none          &none          &none          &none          &none    &bt BT_SEL 1    &bt BT_SEL 2    &bt BT_SEL 3    &none
+                                      &none          &none          &none    &bt BT_SEL 0          
+            >;
+        };
+
+        // Used to change the keyboard's settings.
+
+        settings_layer {
+            label = "Sett.";
+            bindings = <
+&none           &none          &none          &none          &none          &none    &none           &none           &none           &none
+&bootloader    &none    &none    &bt BT_CLR    &bt BT_SEL 0    &bt BT_SEL 3    &none    &unstick    &none    &bootloader
+&none          &none    &none    &none         &bt BT_SEL 1    &bt BT_SEL 4    &none    &none       &none    &none
+&none          &none    &none    &none         &bt BT_SEL 2    &bt BT_SEL 5    &none    &none       &none    &none
+                        &none          &none         &none           &none          
+            >;
+        };
+    };
+};
