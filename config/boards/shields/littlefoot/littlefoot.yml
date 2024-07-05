@@ -1,8 +1,0 @@
-file_format: "1"
-id: littlefoot
-name: Kurp
-type: shield
-url: https://github.com/hazels-garage/kurp
-requires: [pro_micro]
-features:
-  - keys

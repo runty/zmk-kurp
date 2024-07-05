@@ -1,8 +1,46 @@
 # SPDX-License-Identifier: MIT
 
-if SHIELD_LITTLEFOOT
+if SHIELD_LITTLEFOOT 
 
 config ZMK_KEYBOARD_NAME
     default "littlefoot"
+
+endif
+
+if SHIELD_LITTLEFOOT_24 || SHIELD_LITTLEFOOT_24_DONGLE
+
+config ZMK_KEYBOARD_NAME
+    default "littlefoot24"
+
+endif
+
+if ZMK_DISPLAY
+
+config I2C
+    default y
+
+config SSD1306
+    default y
+
+choice ZMK_DISPLAY_WORK_QUEUE
+    default ZMK_DISPLAY_WORK_QUEUE_DEDICATED
+endchoice
+
+endif
+
+if LVGL
+
+config LV_Z_VDB_SIZE
+    default 64
+
+config LV_DPI_DEF
+    default 148
+
+config LV_Z_BITS_PER_PIXEL
+    default 1
+
+choice LV_COLOR_DEPTH
+    default LV_COLOR_DEPTH_1
+endchoice
 
 endif
